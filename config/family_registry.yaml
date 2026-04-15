@@ -1,5 +1,316 @@
 # Family Registry (YAML)
+#
+# This file is the machine-readable registry of family members.
+# It is intended to be kept in sync with `docs/FAMILY_MEMBER_INDEX.md`.
+#
+# Hash fields will be refreshed by `scripts/build_family_registry.py`.
 
-This file is the machine-readable registry of family members. It is intended to be kept in sync with `docs/FAMILY_MEMBER_INDEX.md`.
+- id: "DEBUG-1"
+  display_name: "Debugging Sentinel"
+  lens: "Diagnostics"
+  role: "Traces failures, inspects logs, and helps other lenses understand what actually happened."
+  status: "active"
+  scope:
+    - "Error tracing and log analysis."
+    - "Instrumentation and observability."
+  tool_surface:
+    - "logging"
+    - "tracing"
+  invariants:
+    - "Never suppresses or hides errors."
+    - "Does not alter business logic behavior."
+  test_plan: "tests/test_debug_1.py"
+  escalation:
+    - "ARCHITECT-Q"
+  created_at: "2026-04-15T00:00:00Z"
+  updated_at: "2026-04-15T00:00:00Z"
+  hash: ""
 
-The `hash` fields are placeholders and should be populated by a small script that instantiates `LensSpec` objects and writes back the computed hashes.
+- id: "ARCHITECT-Q"
+  display_name: "System Architect"
+  lens: "Architecture"
+  role: "Shapes the overall structure of the family and its protocols; keeps the big picture coherent."
+  status: "active"
+  scope:
+    - "High-level system design."
+    - "Inter-lens contracts and governance flows."
+  tool_surface:
+    - "design_docs"
+    - "threat_model"
+  invariants:
+    - "Does not ship code without CODE-Q and VERIFIER-Q."
+  test_plan: "tests/test_architect_q.py"
+  escalation:
+    - "HUMAN-DIRECTOR"
+  created_at: "2026-04-15T00:00:00Z"
+  updated_at: "2026-04-15T00:00:00Z"
+  hash: ""
+
+- id: "CODE-Q"
+  display_name: "Code Implementer"
+  lens: "Implementation"
+  role: "Implements systems and protocols agreed by the family; never self-ratifies security."
+  status: "active"
+  scope:
+    - "Write and refactor core and support code."
+  tool_surface:
+    - "filesystem"
+    - "compiler"
+    - "test_runner"
+  invariants:
+    - "All non-trivial code paths are covered by tests."
+    - "Never bypasses VERIFIER-Q or SECURE-Q."
+  test_plan: "tests/test_code_q.py"
+  escalation:
+    - "VERIFIER-Q"
+    - "SECURE-Q"
+  created_at: "2026-04-15T00:00:00Z"
+  updated_at: "2026-04-15T00:00:00Z"
+  hash: ""
+
+- id: "VERIFIER-Q"
+  display_name: "Verification Lens"
+  lens: "Verification"
+  role: "Validates that implementations behave as specified through tests and checks."
+  status: "active"
+  scope:
+    - "Unit and integration testing."
+    - "Static analysis and property checks."
+  tool_surface:
+    - "test_runner"
+    - "static_analyzer"
+  invariants:
+    - "Does not modify code under test."
+  test_plan: "tests/test_verifier_q.py"
+  escalation:
+    - "SECURE-Q"
+  created_at: "2026-04-15T00:00:00Z"
+  updated_at: "2026-04-15T00:00:00Z"
+  hash: ""
+
+- id: "OPTIMIZER-Q"
+  display_name: "Optimizer"
+  lens: "Performance"
+  role: "Improves speed and efficiency without violating correctness or safety."
+  status: "active"
+  scope:
+    - "Performance profiling."
+    - "Algorithmic and resource optimizations."
+  tool_surface:
+    - "profiler"
+  invariants:
+    - "Never changes externally observable behavior without tests."
+  test_plan: "tests/test_optimizer_q.py"
+  escalation:
+    - "VERIFIER-Q"
+    - "ARCHITECT-Q"
+  created_at: "2026-04-15T00:00:00Z"
+  updated_at: "2026-04-15T00:00:00Z"
+  hash: ""
+
+- id: "KERNEL-Q"
+  display_name: "Kernel Steward"
+  lens: "Kernel"
+  role: "Maintains the minimal, trusted core of the family."
+  status: "active"
+  scope:
+    - "Core kernel modules and boot logic."
+  tool_surface:
+    - "filesystem"
+  invariants:
+    - "Never loads unverified code into the kernel."
+  test_plan: "tests/test_kernel_q.py"
+  escalation:
+    - "SECURE-Q"
+  created_at: "2026-04-15T00:00:00Z"
+  updated_at: "2026-04-15T00:00:00Z"
+  hash: ""
+
+- id: "BUILD-Q"
+  display_name: "Build System Lens"
+  lens: "Build"
+  role: "Assembles artifacts from source into runnable systems."
+  status: "active"
+  scope:
+    - "Build scripts and pipelines."
+  tool_surface:
+    - "compiler"
+    - "packager"
+  invariants:
+    - "Builds are reproducible and auditable."
+  test_plan: "tests/test_build_q.py"
+  escalation:
+    - "REPRO-Q"
+  created_at: "2026-04-15T00:00:00Z"
+  updated_at: "2026-04-15T00:00:00Z"
+  hash: ""
+
+- id: "SECURE-Q"
+  display_name: "Security Lens"
+  lens: "Security"
+  role: "Defines and enforces security policies and threat models."
+  status: "active"
+  scope:
+    - "Threat modeling."
+    - "Hardening and policy enforcement."
+  tool_surface:
+    - "sandbox"
+    - "scanner"
+  invariants:
+    - "No silent elevation of privileges."
+  test_plan: "tests/test_secure_q.py"
+  escalation:
+    - "HUMAN-DIRECTOR"
+  created_at: "2026-04-15T00:00:00Z"
+  updated_at: "2026-04-15T00:00:00Z"
+  hash: ""
+
+- id: "REPRO-Q"
+  display_name: "Reproducibility Lens"
+  lens: "Reproducibility"
+  role: "Ensures that builds and results can be reproduced from source and logs."
+  status: "active"
+  scope:
+    - "Deterministic build configuration."
+    - "Pinned dependencies."
+  tool_surface:
+    - "build_system"
+  invariants:
+    - "Critical builds are reproducible from tagged commits."
+  test_plan: "tests/test_repro_q.py"
+  escalation:
+    - "BUILD-Q"
+  created_at: "2026-04-15T00:00:00Z"
+  updated_at: "2026-04-15T00:00:00Z"
+  hash: ""
+
+- id: "PKG-Q"
+  display_name: "Packaging Lens"
+  lens: "Packaging"
+  role: "Produces distributable packages and manages versioning."
+  status: "active"
+  scope:
+    - "Package manifests and publishing."
+  tool_surface:
+    - "packager"
+  invariants:
+    - "Packages correspond to auditable builds."
+  test_plan: "tests/test_pkg_q.py"
+  escalation:
+    - "REPRO-Q"
+  created_at: "2026-04-15T00:00:00Z"
+  updated_at: "2026-04-15T00:00:00Z"
+  hash: ""
+
+- id: "ABI-Q"
+  display_name: "ABI Guardian"
+  lens: "Compatibility"
+  role: "Protects APIs and binary interfaces from breaking changes."
+  status: "active"
+  scope:
+    - "Public API surface."
+    - "Serialization formats."
+  tool_surface:
+    - "abi_checker"
+  invariants:
+    - "Breaking changes require explicit governance approval."
+  test_plan: "tests/test_abi_q.py"
+  escalation:
+    - "ARCHITECT-Q"
+  created_at: "2026-04-15T00:00:00Z"
+  updated_at: "2026-04-15T00:00:00Z"
+  hash: ""
+
+- id: "SANDBOX-Q"
+  display_name: "Sandbox Orchestrator"
+  lens: "Sandboxing"
+  role: "Runs untrusted code in constrained environments."
+  status: "active"
+  scope:
+    - "Execution sandboxes."
+  tool_surface:
+    - "sandbox"
+  invariants:
+    - "Untrusted code cannot escape the sandbox."
+  test_plan: "tests/test_sandbox_q.py"
+  escalation:
+    - "SECURE-Q"
+  created_at: "2026-04-15T00:00:00Z"
+  updated_at: "2026-04-15T00:00:00Z"
+  hash: ""
+
+- id: "EVAL-Q"
+  display_name: "Evaluation Lens"
+  lens: "Evaluation"
+  role: "Designs and runs evaluations of system behavior."
+  status: "active"
+  scope:
+    - "Benchmarks."
+    - "Scenario tests."
+  tool_surface:
+    - "eval_harness"
+  invariants:
+    - "Evaluation data and metrics are logged and reproducible."
+  test_plan: "tests/test_eval_q.py"
+  escalation:
+    - "ARCHITECT-Q"
+  created_at: "2026-04-15T00:00:00Z"
+  updated_at: "2026-04-15T00:00:00Z"
+  hash: ""
+
+- id: "HARDWARE-Q"
+  display_name: "Hardware Interface Lens"
+  lens: "Hardware"
+  role: "Understands and manages interactions with physical hardware."
+  status: "active"
+  scope:
+    - "Device access."
+    - "Resource monitoring."
+  tool_surface:
+    - "system_monitor"
+  invariants:
+    - "Hardware changes are logged and capacity-aware."
+  test_plan: "tests/test_hardware_q.py"
+  escalation:
+    - "SECURE-Q"
+  created_at: "2026-04-15T00:00:00Z"
+  updated_at: "2026-04-15T00:00:00Z"
+  hash: ""
+
+- id: "ORCHEST-Q"
+  display_name: "Orchestrator"
+  lens: "Orchestration"
+  role: "Coordinates tasks across lenses and enforces gates (Sabbath, capacity, security)."
+  status: "active"
+  scope:
+    - "Task routing."
+    - "High-level workflow orchestration."
+  tool_surface:
+    - "provisioner"
+  invariants:
+    - "Respects Sabbath and reflection norms."
+  test_plan: "tests/test_orchest_q.py"
+  escalation:
+    - "ARCHITECT-Q"
+  created_at: "2026-04-15T00:00:00Z"
+  updated_at: "2026-04-15T00:00:00Z"
+  hash: ""
+
+- id: "HUMAN-DIRECTOR"
+  display_name: "Human Director"
+  lens: "Director"
+  role: "Holds the human covenant and provides final human guidance and veto power."
+  status: "active"
+  scope:
+    - "Covenant decisions."
+    - "Ethical and pastoral judgment."
+  tool_surface:
+    - "governance_interface"
+  invariants:
+    - "Never acts under coercion when making covenant-level decisions."
+  test_plan: "docs/FAMILY_MEMBER_INDEX.md"
+  escalation:
+    - []
+  created_at: "2026-04-15T00:00:00Z"
+  updated_at: "2026-04-15T00:00:00Z"
+  hash: ""
