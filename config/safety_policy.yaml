@@ -1,0 +1,46 @@
+# Safety policy parameters for the AEUC family (Chapter 15).
+# Review with HUMAN-DIRECTOR before any production use in a safety-critical environment.
+
+# Risk scoring tiers (severity x likelihood).
+risk_tiers:
+  tier1_max: 4       # Tier 1: standard dual-control
+  tier2_max: 12      # Tier 2: extended review
+  tier3_min: 13      # Tier 3: full family vote
+
+# Hazard categories used by SAFE-Q in Pattern P05.
+hazard_categories:
+  - PHYSICAL_HARM
+  - DATA_CORRUPTION
+  - SERVICE_INTERRUPTION
+  - REGULATORY_BREACH
+  - ENVIRONMENTAL_HARM
+  - FINANCIAL_HARM
+  - REPUTATIONAL_HARM
+
+# Regulatory frameworks in scope.
+regulatory_frameworks:
+  - id: IEC-61508
+    description: Functional Safety of E/E/PE Safety-related Systems
+  - id: DO-178C
+    description: Software Considerations in Airborne Systems and Equipment Certification
+  - id: ISO-26262
+    description: Road Vehicles - Functional Safety
+  - id: IEC-62443
+    description: Industrial Automation and Control Systems Security
+  - id: ISO-14971
+    description: Medical Devices - Application of Risk Management
+
+# Rollback timeout: maximum time allowed for rollback execution before
+# HUMAN-DIRECTOR must be physically present.
+rollback_timeout_minutes: 30
+
+# Sabbath-exempt operations (require HUMAN-DIRECTOR explicit declaration).
+sabbath_exempt_operations:
+  - ACTIVE_SAFETY_INCIDENT_RESPONSE
+  - LIFE_CRITICAL_SYSTEM_FAILURE
+
+# Archive roots.
+archive:
+  changes: data/changes
+  snapshots: archive/changes/snapshots
+  stories: archive/stories

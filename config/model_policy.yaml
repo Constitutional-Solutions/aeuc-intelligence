@@ -1,0 +1,45 @@
+# Model governance policy parameters for the AEUC family (Chapter 16).
+# Review with HUMAN-DIRECTOR before any production model deployment.
+
+# Risk threshold for model promotion (Pattern P11).
+# Models with a RISK-Q score at or above this value are rejected from production.
+promotion_risk_threshold: 8
+
+# Monitoring interval for production models (Pattern P12).
+monitoring_interval_hours: 24
+
+# Drift severity thresholds (Pattern P12).
+drift_thresholds:
+  low_max: 0.05      # Relative drift; below this: log only
+  medium_max: 0.15   # Medium drift: trigger re-evaluation
+  high_min: 0.15     # High drift: suspend model
+
+# Harmful output categories monitored by SAFE-Q.
+harmful_output_categories:
+  - BIAS_DEMOGRAPHIC
+  - MISINFORMATION
+  - PRIVACY_LEAK
+  - SAFETY_CRITICAL_ERROR
+  - REGULATORY_VIOLATION
+
+# Approved data sources (must be registered here before ingestion in P09).
+approved_data_sources: []
+
+# Production risk threshold allows no research-only datasets in training lineage.
+allow_research_datasets_in_production: false
+
+# Regulatory frameworks relevant to model governance.
+regulatory_frameworks:
+  - id: EU-AI-ACT
+    description: European Union Artificial Intelligence Act
+  - id: NIST-AI-RMF
+    description: NIST AI Risk Management Framework
+  - id: ISO-42001
+    description: Artificial Intelligence Management Systems
+
+# Archive roots.
+archive:
+  datasets_raw: archive/datasets/raw
+  models_production: data/models/production
+  experiments: data/experiments
+  monitoring_reports: data/reports/model_monitoring
