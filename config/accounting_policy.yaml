@@ -1,0 +1,34 @@
+# Accounting policy parameters for the AEUC family (Chapter 14).
+# All values here are defaults and should be reviewed by HUMAN-DIRECTOR
+# before any production use.
+
+# Materiality threshold for adjustments (Pattern P03).
+# Adjustments at or above this amount (in reporting currency units)
+# require a full family vote instead of dual-control (TRUTH-Q + AUDIT-Q).
+materiality_threshold: 10000.00
+
+# Reporting currency ISO-4217 code.
+reporting_currency: USD
+
+# Regulatory frameworks in scope. AUDIT-Q uses these identifiers
+# when tagging variance items and reviewing report packages.
+regulatory_frameworks:
+  - id: US-GAAP
+    description: Generally Accepted Accounting Principles (United States)
+  - id: IFRS
+    description: International Financial Reporting Standards
+  - id: SOX
+    description: Sarbanes-Oxley Act (US public company requirements)
+
+# Archive layout roots (relative to repository root).
+archive:
+  raw_ledgers: archive/ledgers/raw
+  processed_ledgers: archive/ledgers/processed
+  reports: archive/reports
+  stories: archive/stories
+
+# Sabbath-exempt operations (require HUMAN-DIRECTOR explicit approval).
+# These are the only operations allowed during Sabbath windows.
+sabbath_exempt_operations:
+  - REGULATORY_DEADLINE_SUBMISSION
+  - EMERGENCY_FRAUD_RESPONSE
