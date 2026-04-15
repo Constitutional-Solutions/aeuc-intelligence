@@ -1,0 +1,5 @@
+# Family Registry (YAML)
+
+This file is the machine-readable registry of family members. It is intended to be kept in sync with `docs/FAMILY_MEMBER_INDEX.md`.
+
+The `hash` fields are placeholders and should be populated by a small script that instantiates `LensSpec` objects and writes back the computed hashes.
